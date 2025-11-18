@@ -1,6 +1,6 @@
 # Invoke-MultiRDP
 
-A modified fork of [fabianosrc/TermsrvPatcher](https://github.com/fabianosrc/TermsrvPatcher), designed for integration with [PsMapExec](https://github.com/The-Viper-One/PsMapExec). This fork also allow for cleanup and restoration of configuration.
+A modified fork of [fabianosrc/TermsrvPatcher](https://github.com/fabianosrc/TermsrvPatcher), designed for integration with [PsMapExec](https://github.com/The-Viper-One/PsMapExec) which can also be run standalone. This fork also allow for cleanup and restoration of configuration.
 
 This fork incorporates community patches to support the latest Windows versions, including **Windows Server 2025** and **Windows 11 25H2**. As submitted via pull request by the following users:
 
