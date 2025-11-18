@@ -1,53 +1,51 @@
-# TermsrvPatcher
-![Environment](https://img.shields.io/badge/Windows-7,%2010,%2011-brightgreen.svg)
-![license](https://img.shields.io/github/license/fabianomsrc/TermsrvPatcher)
+# Invoke-MultiRDP
 
-# Windows 11 24H2 support added!
+A modified fork of [fabianosrc/TermsrvPatcher](https://github.com/fabianosrc/TermsrvPatcher), designed for integration with [PsMapExec](https://github.com/The-Viper-One/PsMapExec). This fork also allow for cleanup and restoration of configuration.
 
-Patch termsrv.dll so that multiple remote users can open an RDP session on a non-Windows Server computer
+This fork incorporates community patches to support the latest Windows versions, including **Windows Server 2025** and **Windows 11 25H2**. As submitted via pull request by the following users:
 
-## Credits
-This work is based on the [patch-termsrv.dll](https://github.com/ReneNyffenegger/patch-termsrv.dll) project by Rene Nyffenegger
+* [justintubbs1](https://github.com/fabianosrc/TermsrvPatcher/pull/21) - Windows Server 2025 support
+* [pesaventofilippo](https://github.com/fabianosrc/TermsrvPatcher/pull/22) - Windows 11 25H2 support
 
-## Links
-[How to Allow Multiple RDP Sessions in Windows 10 and 11?](http://woshub.com/how-to-allow-multiple-rdp-sessions-in-windows-10)
+## Requirements
 
-[Multiple RDP (Remote Desktop) sessions in Windows 10](https://www.mysysadmintips.com/windows/clients/545-multiple-rdp-remote-desktop-sessions-in-windows-10)
+- Administrator rights
 
-## Prerequisites
-Requires PowerShell 5.1 or higher
-
-[Download and install Windows PowerShell 5.1](https://www.microsoft.com/en-us/download/details.aspx?id=54616)
-
-# How to use
-Download TermsrvPatcher.ps1 file and place it in any folder e.g.
-
-```txt
-C:\Users\YourUserName\Downloads
-```
-
-Go to the folder your script is in
-
-> PowerShell Cmdlet
+## Usage
 
 ```powershell
-Set-Location -Path C:\Users\YourUserName\Downloads
-```
-> CMD syntax
+# Enable
+Invoke-MultiRDP -Enable
 
-```cmd
-cd c:\Users\YourUserName\Downloads
-```
-
-> Run the script
-```powershell
-.\TermsrvPatcher.ps1
+# Disable
+Invoke-MultiRDP -Disable
 ```
 
-Or... Right click on TermsrvPacther.ps1, select 'Run with PowerShell' and enjoy :-)
+> Example Output (Enable)
+```
+[*] Starting MultiRDP enable process...
+[*] The Remote Desktop Services (TermService) has been stopped successfully.
+[*] Owner of termsrv.dll: NT AUTHORITY\SYSTEM
 
-#### Supported Terminal Services versions:
- - Windows 7 Pro SP1 64-bit
- - Windows 10 and Windows 11 23H2/24H2
- - Windows Server 2016
- - Windows Server 2022
+SUCCESS: The file (or folder): "C:\Windows\System32\termsrv.dll" now owned by user "ESSOS\GOAD-WS08$".
+processed file: C:\Windows\System32\termsrv.dll
+Successfully processed 1 files; Failed processing 0 files
+
+[*] Detected OS: Windows 10
+[*] The file is already patched. No changes are needed.
+
+[*] MultiRDP has been enabled
+```
+
+> Example Output (Disable)
+```
+[*] Starting MultiRDP disable process...
+[*] The Remote Desktop Services (TermService) has been stopped successfully.
+
+SUCCESS: The file (or folder): "C:\Windows\System32\termsrv.dll" now owned by user "ESSOS\GOAD-WS08$".
+processed file: C:\Windows\System32\termsrv.dll
+Successfully processed 1 files; Failed processing 0 files
+
+[*] Original termsrv.dll restored from backup.
+[*] MultiRDP has been disabled
+```
